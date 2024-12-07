@@ -30,6 +30,9 @@ spec:
       interval: 12h
   values:
     controller:
+      config:
+        use-proxy-protocol: true
       service:
         annotations:
           load-balancer.hetzner.cloud/network-zone: eu-central
+          load-balancer.hetzner.cloud/uses-proxyprotocol: true
