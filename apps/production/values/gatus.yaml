@@ -1,0 +1,19 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gatus
+  namespace: gatus
+spec:
+  values:
+    ingress:
+      enabled: true
+      ingressClassName: nginx
+      annotations:
+        ingress.kubernetes.io/ssl-redirect: true
+        cert-manager.io/cluster-issuer: letsencrypt-nginx
+      hosts:
+      - gatus.k3s.simonhammes.cc
+      tls:
+      - secretName: gatus-tls
+        hosts:
+        - gatus.k3s.simonhammes.cc
