@@ -10,3 +10,28 @@ data:
 
     auth-default-access: "deny-all"
     auth-file: "/var/lib/ntfy/user.db"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ntfy
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - ntfy.k3s.simonhammes.cc
+    secretName: ntfy-tls
+  rules:
+  - host: ntfy.k3s.simonhammes.cc
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ntfy
+            port:
+              number: 80
