@@ -5,5 +5,8 @@ metadata:
   namespace: ntfy
 data:
   server.yml: |
-    # Template: https://github.com/binwiederhier/ntfy/blob/main/server/server.yml
     base-url: https://ntfy.k3s.simonhammes.cc
+    behind-proxy: true
+
+    auth-default-access: "deny-all"
+    auth-file: "/var/lib/ntfy/user.db"
