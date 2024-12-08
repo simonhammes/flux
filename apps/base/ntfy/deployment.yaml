@@ -28,7 +28,12 @@ spec:
         - name: config
           mountPath: "/etc/ntfy"
           readOnly: true
+        - name: database
+          mountPath: /var/lib/ntfy
       volumes:
       - name: config
         configMap:
           name: ntfy
+      - name: database
+        persistentVolumeClaim:
+          claimName: ntfy-database-pvc
